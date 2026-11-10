@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffdea5"/>
+      <stop offset="45%" stop-color="#c5a059"/>
+      <stop offset="100%" stop-color="#775a19"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#fbb6a8"/>
+      <stop offset="100%" stop-color="#865046"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer Decorative Ring -->
+  <circle cx="256" cy="256" r="236" fill="#1c1b1b" stroke="url(#goldGradient)" stroke-width="8"/>
+  <circle cx="256" cy="256" r="218" fill="none" stroke="url(#goldGradient)" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+  
+  <!-- Balloon Elements -->
+  <g transform="translate(256, 180)">
+    <!-- Main Big Balloon -->
+    <ellipse cx="0" cy="-20" rx="65" ry="80" fill="url(#goldGradient)" filter="url(#glow)" opacity="0.95"/>
+    <polygon points="-8,58 8,58 0,68" fill="#c5a059"/>
+    <path d="M0,68 Q10,95 -5,120 Q5,145 0,160" fill="none" stroke="url(#goldGradient)" stroke-width="3" opacity="0.8"/>
+    
+    <!-- Accent Balloon Left -->
+    <ellipse cx="-55" cy="10" rx="42" ry="54" fill="url(#accentGradient)" opacity="0.85"/>
+    <polygon points="-60,62 -50,62 -55,69" fill="#865046"/>
+    <path d="M-55,69 Q-45,95 -60,125" fill="none" stroke="#865046" stroke-width="2" opacity="0.6"/>
+
+    <!-- Accent Balloon Right -->
+    <ellipse cx="55" cy="5" rx="45" ry="58" fill="url(#goldGradient)" opacity="0.85"/>
+    <polygon points="50,61 60,61 55,68" fill="#775a19"/>
+    <path d="M55,68 Q45,95 50,125" fill="none" stroke="#775a19" stroke-width="2" opacity="0.6"/>
+    
+    <!-- Sparkles -->
+    <path d="M-65,-40 Q-65,-30 -75,-30 Q-65,-30 -65,-20 Q-65,-30 -55,-30 Q-65,-30 -65,-40" fill="#ffdea5"/>
+    <path d="M70,-50 Q70,-42 62,-42 Q70,-42 70,-34 Q70,-42 78,-42 Q70,-42 70,-50" fill="#ffffff"/>
+  </g>
+  
+  <!-- 7+ Monogram -->
+  <text x="236" y="222" font-family="'Playfair Display', serif" font-size="78" font-weight="800" fill="#ffffff" text-anchor="middle" filter="url(#glow)">7</text>
+  <text x="282" y="195" font-family="'Outfit', sans-serif" font-size="46" font-weight="700" fill="#ffdea5" text-anchor="middle">+</text>
+  
+  <!-- Brand Text -->
+  <text x="256" y="380" font-family="'Playfair Display', serif" font-size="34" font-weight="700" fill="url(#goldGradient)" letter-spacing="4" text-anchor="middle">7 PLUS EVENTS</text>
+  <text x="256" y="415" font-family="'Outfit', sans-serif" font-size="16" font-weight="600" fill="#e9c176" letter-spacing="6" text-anchor="middle">UDAIPUR • RAJASTHAN</text>
+  
+  <!-- Bottom Stars -->
+  <polygon points="256,432 260,442 271,442 262,448 265,458 256,452 247,458 250,448 241,442 252,442" fill="#c5a059"/>
+</svg>
