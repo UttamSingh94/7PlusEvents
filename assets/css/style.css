@@ -41,41 +41,50 @@
 /* --------------------------------------------------------------------------
    Typography Scale Fallbacks (Guarantees exact font sizes & serif headings)
    -------------------------------------------------------------------------- */
-h1, .text-display-lg {
-  font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem) !important;
+h1, .hero-title, .text-display-lg {
+  font-family: var(--font-serif) !important;
+  font-size: clamp(2.25rem, 5vw, 3.85rem) !important;
   line-height: 1.15 !important;
-  letter-spacing: -0.02em;
-  font-weight: 700;
+  letter-spacing: -0.02em !important;
+  font-weight: 700 !important;
 }
 
-.text-display-lg-mobile {
-  font-family: var(--font-serif);
-  font-size: 2.25rem !important;
-  line-height: 2.75rem !important;
-  letter-spacing: -0.01em;
-  font-weight: 700;
+.hero-subtitle {
+  font-family: var(--font-serif) !important;
+  font-size: clamp(1.2rem, 2.4vw, 1.75rem) !important;
+  line-height: 1.35 !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 767px) {
+  .text-display-lg-mobile {
+    font-family: var(--font-serif) !important;
+    font-size: 2.25rem !important;
+    line-height: 2.75rem !important;
+    letter-spacing: -0.01em !important;
+    font-weight: 700 !important;
+  }
 }
 
 h2, .text-headline-lg, .text-headline-lg-mobile {
-  font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 3.2vw, 2.5rem) !important;
+  font-family: var(--font-serif) !important;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem) !important;
   line-height: 1.25 !important;
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 h3, .text-headline-md {
-  font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.75rem) !important;
+  font-family: var(--font-serif) !important;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem) !important;
   line-height: 1.3 !important;
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 .text-headline-sm {
-  font-family: var(--font-serif);
+  font-family: var(--font-serif) !important;
   font-size: clamp(1.15rem, 1.8vw, 1.375rem) !important;
   line-height: 1.4 !important;
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 .font-display-lg,
@@ -171,7 +180,7 @@ img {
 /* --------------------------------------------------------------------------
    3. iOS Safari Form Inputs Fix (Prevents Auto-Zoom on iPhone)
    -------------------------------------------------------------------------- */
-input, select, textarea, button {
+input, select, textarea {
   font-family: inherit;
   font-size: 16px !important; /* Critical: prevents iOS Safari zooming on focus */
 }
@@ -230,15 +239,74 @@ textarea {
    5. Header & Safe Area Handling
    -------------------------------------------------------------------------- */
 header.sticky {
-  padding-top: max(0.5rem, var(--sat));
+  padding-top: max(0.25rem, var(--sat));
+  z-index: 50;
 }
 
-/* Floating WhatsApp Button with Safe Area Offset */
+/* --------------------------------------------------------------------------
+   6. Mobile Menu Drawer (Full-Height Seamless Mobile Overlay)
+   -------------------------------------------------------------------------- */
+#mobileDrawer {
+  position: fixed;
+  top: calc(5rem + var(--sat));
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - 5rem - var(--sat));
+  height: calc(100dvh - 5rem - var(--sat));
+  background: rgba(252, 249, 248, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 45;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  padding: 1.25rem 1.5rem calc(2.5rem + var(--sab)) 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid rgba(209, 197, 180, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#mobileDrawer.hidden {
+  display: none !important;
+}
+
+body.menu-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+.mobile-nav-link {
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 0.85rem 0.5rem;
+  border-bottom: 1px solid rgba(209, 197, 180, 0.25);
+  color: var(--color-on-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link:active {
+  color: var(--color-primary);
+  padding-left: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   6B. Persistent Floating WhatsApp Button
+   -------------------------------------------------------------------------- */
+#floatingWhatsAppBtn,
 .floating-whatsapp-btn {
   position: fixed;
   right: 1.5rem;
   bottom: calc(1.5rem + var(--sab));
-  z-index: 990;
+  z-index: 40;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -247,30 +315,49 @@ header.sticky {
   background-color: var(--color-whatsapp);
   color: #ffffff;
   box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
+#floatingWhatsAppBtn:hover,
 .floating-whatsapp-btn:hover {
   background-color: var(--color-whatsapp-dark);
   transform: translateY(-2px) scale(1.03);
 }
 
+#floatingWhatsAppBtn:active,
 .floating-whatsapp-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
-/* --------------------------------------------------------------------------
-   6. Mobile Menu Drawer
-   -------------------------------------------------------------------------- */
-#mobileDrawer {
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  padding-bottom: max(1.5rem, var(--sab));
-  padding-top: max(1rem, var(--sat));
+/* On mobile: compact circular button with pulse ring */
+@media (max-width: 640px) {
+  #floatingWhatsAppBtn,
+  .floating-whatsapp-btn {
+    right: 1rem;
+    bottom: calc(1rem + var(--sab));
+    padding: 0.8rem;
+    border-radius: 9999px;
+  }
 }
 
-#mobileDrawer.hidden {
-  display: none;
+/* CRITICAL: Hide floating WhatsApp button when mobile menu or modals are open */
+body.menu-open #floatingWhatsAppBtn,
+body.menu-open .floating-whatsapp-btn,
+body.modal-open #floatingWhatsAppBtn,
+body.modal-open .floating-whatsapp-btn {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Ensure footer links are never covered by floating button on mobile */
+@media (max-width: 768px) {
+  footer {
+    padding-bottom: calc(6rem + var(--sab)) !important;
+  }
 }
 
 /* --------------------------------------------------------------------------

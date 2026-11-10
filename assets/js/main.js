@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileDrawer.classList.remove('hidden');
     if (menuIcon) menuIcon.textContent = 'close';
     document.body.style.overflow = 'hidden'; // Lock background scroll
+    document.body.classList.add('menu-open');
   }
 
   function closeMobileMenu() {
@@ -125,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileDrawer.classList.add('hidden');
     if (menuIcon) menuIcon.textContent = 'menu';
     document.body.style.overflow = ''; // Restore scroll
+    document.body.classList.remove('menu-open');
   }
 
   if (mobileMenuBtn && mobileDrawer) {
@@ -223,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     lightboxModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
   }
 
   function closeLightboxModal() {
@@ -230,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxModal.classList.add('hidden');
     if (lightboxImg) lightboxImg.src = '';
     document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
   }
 
   galleryItems.forEach(item => {
@@ -429,12 +433,14 @@ Thank you!`;
 
     noticeModal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
   }
 
   function closeNoticeModal() {
     if (!noticeModal) return;
     noticeModal.classList.remove('active');
     document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
   }
 
   if (closeNoticeBtn) {
